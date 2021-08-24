@@ -1,5 +1,4 @@
 img = "";
-object = [];
 status = "";
 
 function preload(){
@@ -9,14 +8,14 @@ function preload(){
 function setup(){
     canvas = createCanvas(600, 400);
     canvas.center();
-    objectDetecter = ml5.objectDetecter("cocossd", modelLoaded);
+    objectDetect = ml5.objectDetector('cocossd', modelLoaded);
     document.getElementById("status").innerHTML = "Status : Detecting Object";
 }
 
 function modelLoaded(){
     console.log("Model Loaded");
     status = true;
-    objectDetecter.detect(img, gotResults);
+    objectDetect.detect(img, gotResults);
 }
 
 function gotResults(error, results){
@@ -31,10 +30,10 @@ function draw(){
     text("Dog", 50, 80);
     stroke("#FF0000");
     noFill();
-    rect(30, 60 , 400, 330)
+    rect(30, 60 , 400, 330);
 
-    text("Cat", 50, 80);
+    text("Cat", 320, 80);
     stroke("#FF0000");
     noFill();
-    rect(30, 60 , 400, 330)
+    rect(300, 60 , 250, 330);
 }
