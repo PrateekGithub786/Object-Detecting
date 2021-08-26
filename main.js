@@ -1,4 +1,5 @@
 img = "";
+object = [];
 status = "";
 
 function preload(){
@@ -23,17 +24,23 @@ function gotResults(error, results){
         console.log(error)
     }
     console.log(results);
+    object = results;
 }
 
 function draw(){
     image(img, 0, 0, 600, 400);
-    text("Dog", 50, 80);
-    stroke("#FF0000");
-    noFill();
-    rect(30, 60 , 400, 330);
+    
+    if(status != ""){
+        for(i = 0; i < object.length; i++){
+            document.getElementById("status").innerHTML = "Status : Object Detected";
 
-    text("Cat", 320, 80);
-    stroke("#FF0000");
-    noFill();
-    rect(300, 60 , 250, 330);
+            fill(255, 0, 0);
+            percent = floor(object[i].confidence * 100);
+            text(object[i].label + " " + percent + " %", object[i].x + 15, object[i].y + 15);
+            noFill();
+            stroke("red");
+            rect(object[i].x, object[i].y, object[i].width, object[i].height);
+            
+        }
+    }
 }
